@@ -10,12 +10,12 @@ services:
     working_dir: /var/www/html
     volumes:
       - ../projects/index.html:/var/www/html/index.html
-      - ../projects/gossby:/var/www/html/gossby
-      - ../projects/teawork/api:/var/www/html/teawork/api
-      - ../projects/teawork/wordpress:/var/www/html/teawork/wordpress
+      - ../projects/gossby:/var/www/gossby
+      - ../projects/teawork/api:/var/www/teawork/api
+      - ../projects/teawork/wordpress:/var/www/teawork/wordpress
     ports:
       - 80:80
-    # restart: always
+    restart: always
     networks:
       docker_network:
         ipv4_address: "10.3.0.16"
@@ -24,13 +24,13 @@ services:
     image: mariadb:10.4
     restart: always
     environment:
-      MYSQL_USER: dongtt
-      MYSQL_PASSWORD: dongtt
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: "dongtt"
+      MYSQL_PASSWORD: "dongtt"
+      MYSQL_ROOT_PASSWORD: "root"
     ports:
       - "3306:3306"
     volumes:
-      - ./docker/sql:/docker-entrypoint-initdb.d
+      - ./etc/sql:/docker-entrypoint-initdb.d
       - docker_db:/var/lib/mysql
     networks:
       docker_network:
