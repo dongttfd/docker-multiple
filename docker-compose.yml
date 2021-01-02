@@ -7,9 +7,9 @@ services:
     build:
       context: "./etc"
       dockerfile: web.dockerfile
-    working_dir: /var/www/html
+    working_dir: /var/www
     volumes:
-      - ../projects/index.html:/var/www/html/index.html
+      - ./etc/index.html:/var/www/html/index.html
       - ../projects/gossby:/var/www/gossby
       - ../projects/teawork/api:/var/www/teawork/api
       - ../projects/teawork/wordpress:/var/www/teawork/wordpress
