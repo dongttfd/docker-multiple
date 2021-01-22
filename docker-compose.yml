@@ -9,10 +9,11 @@ services:
       dockerfile: web.dockerfile
     working_dir: /var/www
     volumes:
-      - ./etc/index.html:/var/www/html/index.html
-      - ../projects/gossby:/var/www/gossby
-      - ../projects/teawork/api:/var/www/teawork/api
-      - ../projects/teawork/wordpress:/var/www/teawork/wordpress
+      - ./etc/index.html:/var/www/html/index.html:cached
+      - ../projects/gossby:/var/www/gossby:delegated
+      - ../projects/teawork/api:/var/www/teawork/api:delegated
+      - ../projects/teawork/wordpress:/var/www/teawork/wordpress:delegated
+      # - ~/.composer/docker-cache/:/root/.composer:cached
     ports:
       - 80:80
     restart: always
@@ -30,7 +31,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./etc/sql:/docker-entrypoint-initdb.d
+      - ./etc/sql:/docker-entrypoint-initdb.d:cached
       - docker_db:/var/lib/mysql
     networks:
       docker_network:
